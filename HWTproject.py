@@ -83,3 +83,12 @@ sm.imsave('wow2.jpg',stackedmn)
 #Repeating compression and slicing n times
 
 #No Matrix multiplication
+
+Non=zeros((img.shape[0],img.shape[1]))
+for n in range((img.shape[0]-1)//2):
+    for m in range((img.shape[1]-1)//2):
+        Non[n,m]=(img[n*2,m*2]+img[n*2,2*m+1]+img[2*n+1,2*m]+img[2*n+1,2*m+1])/4
+        Non[n,img.shape[1]//2+m]=(-img[2*n,2*m]+img[2*n,2*m+1]-img[2*n+1,2*m]+img[2*n+1,2*m+1])/4
+        Non[img.shape[0]//2+n,m]=(-img[2*n,2*m]-img[2*n,2*m+1]+img[2*n+1,m]+img[2*n+1,2*m+1])/4
+        Non[img.shape[0]//2+n,img.shape[1]//2+m]=(-img[2*n,2*m]+img[2*n,2*m+1]+img[2*n+1,2*m]-img[2*n+1,2*m+1])/4
+sm.imsave('Non.jpg',Non)
