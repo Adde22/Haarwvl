@@ -38,6 +38,18 @@ def HaarWavelet(array):
     t=np.transpose(haararray1)
     e=dot(b,t)
     sm.imsave('AAB.jpg',e)
+    aa=e[:int(e.shape[0]/2),:int(e.shape[1]/2)]
+    sm.imsave('aa.jpg',aa)
+    ab=e[:int(e.shape[0]/2),int(e.shape[1]/2):]
+    sm.imsave('ab.jpg',ab)
+    ac=e[int(e.shape[0]/2):,:int(e.shape[1]/2)] 
+    sm.imsave('ac.jpg',ac)
+    ad=e[int(e.shape[0]/2):,int(e.shape[1]/2):]  
+    sm.imsave('ad.jpg',ad)
+    m=column_stack((aa,ab))
+    n=column_stack((ac,ad))
+    mn=vstack((m,n))
+    return mn
     
 def Revert(array):
     haararray=np.zeros((array.shape[0],array.shape[0]))
@@ -57,11 +69,18 @@ def Revert(array):
     return print('hi')
 
 
+
 def HaarIterate(array,t=1):
     for i in range(t):
         HaarWavelet(array)
-        array=Converttoarray('AAB.jpg')
-    return array
+        array=Converttoarray('aa.jpg')
+    ab=Converttoarray('ab.jpg')
+    ac=Converttoarray('ac.jpg')
+    ad=Converttoarray('ad.jpg')
+    m=column_stack((array,ab))
+    n=column_stack((ac,ad))
+    mn=vstack((m,n))
+    return mn
 
 def RevertIterate(array,t=1):
     for i in range(t):
@@ -69,7 +88,5 @@ def RevertIterate(array,t=1):
         array=Converttoarray('AAC.jpg')
     return array
         
-HaarIterate(Converttoarray('kvinna.jpg'),2)
-RevertIterate(HaarIterate(Converttoarray('kvinna.jpg'),1),1)
-
+Revert(HaarIterate(Converttoarray('kvinna.jpg'),3))
 
