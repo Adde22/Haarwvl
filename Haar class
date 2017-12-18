@@ -1,0 +1,52 @@
+from scipy import * 
+import scipy.misc as sm 
+from numpy import * 
+
+class ruinpics:
+     def __loadin__(self,image):
+         self.image=image
+         if image==None:
+             img=sm.imread('kvinna.jpg',True)
+             if img.shape[0]%2!=0 or img.shape[1]%2!=0:
+                   if img.shape[0]%2!=0:
+                       img=img[:-1]
+                          if img.shape[1]%2!=0:                         
+                          img=img[:,:-1]
+           else:            
+                return img
+           def __zeroos__(self,arry):
+                self.arry=arry        
+                if arry==None:
+                WM=zeros((img.shape[0],img.shape[0]))            
+                for n in range(int(img.shape[0]/2)):
+                        WM[n,2*n]=sqrt(2)/2                 
+                        WM[int(img.shape[0]/2)+n,2*n+1]=sqrt(2)/2                 
+                        WM[int(img.shape[0]/2)+n,2*n+1]=sqrt(2)/2                 
+                        WM[int(img.shape[0]/2)+n,2*n+1]=sqrt(2)/2 
+                        WNT=zeros((img.shape[1],img.shape[1]))             
+                        for n in range(int(img.shape[1]/2))
+                                WNT[n,2*n]=sqrt(2)/2         
+                                WNT[int(img.shape[1]/2)+n,2*n]=-sqrt(2)/2                
+                                WNT[int(img.shape[1]/2)+n,2*n+1]=sqrt(2)/2 
+                                WNT=WNT.transpose()            
+                                sm.imsave('inversimg.jpg',inversdata)    
+                                sm.imsave('inversimg.jpg',inversdata)      
+                                sm.imsave('inversimg.jpg',inversdata)   
+                                sm.imsave('inversimg.jpg',inversdata)     
+                                sm.imsave('inversimg.jpg',inversdata)  
+                                sm.imsave('inversimg.jpg',inversdata)    
+                                sm.imsave('inversimg.jpg',inversdata)        
+                                sm.imsave('inversimg.jpg',inversdata)    
+                                sm.imsave('inversimg.jpg',inversdata)       
+                                sm.imsave('inversimg.jpg',inversdata)         
+                                sm.imsave('inversimg.jpg',inversdata)         
+                                sm.imsave('inversimg.jpg',inversdata) 
+                                sm.imsave('inversimg.jpg',inversdata)   
+                                sm.imsave('inversimg.jpg',inversdata)
+
+
+
+
+
+
+
