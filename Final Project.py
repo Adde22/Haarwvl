@@ -82,11 +82,6 @@ def HaarIterate(array,t=1):
     mn=vstack((m,n))
     return mn
 
-def RevertIterate(array,t=1):
-    for i in range(t):
-        Revert(array)
-        array=Converttoarray('AAC.jpg')
-    return array
-        
+
 Revert(HaarIterate(Converttoarray('kvinna.jpg'),3))
 
