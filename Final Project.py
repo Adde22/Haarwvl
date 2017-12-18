@@ -23,46 +23,53 @@ def Converttoarray(x):
 def HaarWavelet(array):
     haararray=np.zeros((array.shape[0],array.shape[0]))
     for i in range(haararray.shape[0]):
-        haararray[int(i/2),i]=1/2
-        haararray[-int(i/2)-1,-i-1]=-1/2
+        haararray[int(i/2),i]=(2**(1/2))/2
+        haararray[-int(i/2)-1,-i-1]=-(2**(1/2))/2
     for i in range(haararray.shape[0]//2):
-        haararray[-i-1,-2*i-1]=1/2
+        haararray[-i-1,-2*i-1]=(2**(1/2))/2
     b=dot(haararray,array)
     sm.imsave('AAA.jpg', b)
     haararray1=np.zeros((array.shape[1],array.shape[1]))
     for i in range(haararray1.shape[1]):
-        haararray1[int(i/2),i]=1/2
-        haararray1[-int(i/2)-1,-i-1]=-1/2
+        haararray1[int(i/2),i]=(2**(1/2))/2
+        haararray1[-int(i/2)-1,-i-1]=-(2**(1/2))/2
     for i in range(haararray1.shape[1]//2):
-        haararray1[-i-1,-2*i-1]=1/2
-    t=np.transpose(2*haararray1)
+        haararray1[-i-1,-2*i-1]=(2**(1/2))/2
+    t=np.transpose(haararray1)
     e=dot(b,t)
     sm.imsave('AAB.jpg',e)
     
 def Revert(array):
     haararray=np.zeros((array.shape[0],array.shape[0]))
     for i in range(haararray.shape[0]):
-        haararray[int(i/2),i]=1/2
-        haararray[-int(i/2)-1,-i-1]=-1/2
+        haararray[int(i/2),i]=(2**(1/2))/2
+        haararray[-int(i/2)-1,-i-1]=-(2**(1/2))/2
     for i in range(haararray.shape[0]//2):
-        haararray[-i-1,-2*i-1]=1/2
+        haararray[-i-1,-2*i-1]=(2**(1/2))/2
     haararray1=np.zeros((array.shape[1],array.shape[1]))
     for i in range(haararray1.shape[1]):
-        haararray1[int(i/2),i]=1/2
-        haararray1[-int(i/2)-1,-i-1]=-1/2
+        haararray1[int(i/2),i]=(2**(1/2))/2
+        haararray1[-int(i/2)-1,-i-1]=-(2**(1/2))/2
     for i in range(haararray1.shape[1]//2):
-        haararray1[-i-1,-2*i-1]=1/2
+        haararray1[-i-1,-2*i-1]=(2**(1/2))/2
     f=dot(np.transpose(haararray),dot(array,haararray1))
     sm.imsave('AAC.jpg',f)
     return print('hi')
 
 
-def HaarIterate(array,t=2):
-    for i in range(t+1):
+def HaarIterate(array,t=1):
+    for i in range(t):
         HaarWavelet(array)
-        array=sm.imread('AAB.jpg',True)
+        array=Converttoarray('AAB.jpg')
+    return array
 
-
-HaarIterate(Converttoarray('kvinna.jpg'))
+def RevertIterate(array,t=1):
+    for i in range(t):
+        Revert(array)
+        array=Converttoarray('AAC.jpg')
+    return array
         
+HaarIterate(Converttoarray('kvinna.jpg'),2)
+RevertIterate(HaarIterate(Converttoarray('kvinna.jpg'),1),1)
+
 
