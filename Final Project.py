@@ -28,7 +28,6 @@ def HaarWavelet(array):
     for i in range(haararray.shape[0]//2):
         haararray[-i-1,-2*i-1]=(2**(1/2))/2
     b=dot(haararray,array)
-    sm.imsave('AAA.jpg', b)
     haararray1=np.zeros((array.shape[1],array.shape[1]))
     for i in range(haararray1.shape[1]):
         haararray1[int(i/2),i]=(2**(1/2))/2
@@ -37,7 +36,7 @@ def HaarWavelet(array):
         haararray1[-i-1,-2*i-1]=(2**(1/2))/2
     t=np.transpose(haararray1)
     e=dot(b,t)
-    sm.imsave('AAB.jpg',e)
+    sm.imsave('AAA.jpg',e)
     aa=e[:int(e.shape[0]/2),:int(e.shape[1]/2)]
     sm.imsave('aa.jpg',aa)
     ab=e[:int(e.shape[0]/2),int(e.shape[1]/2):]
@@ -68,8 +67,6 @@ def Revert(array):
     sm.imsave('AAC.jpg',f)
     return print('hi')
 
-
-
 def HaarIterate(array,t=1):
     for i in range(t):
         HaarWavelet(array)
@@ -82,6 +79,20 @@ def HaarIterate(array,t=1):
     mn=vstack((m,n))
     return mn
 
+def Nomatrixcompress(array):
+    Non=zeros((array.shape[0],array.shape[1]))
+    for n in range((array.shape[0])//2-1):
+        for m in range((array.shape[1])//2-1):
+            Non[n,m]=(array[n*2,m*2]+array[n*2,2*m+1]+array[2*n+1,2*m]+array[2*n+1,2*m+1])/4
+            Non[n,array.shape[1]//2+m]=(-(array[2*n,2*m])+array[2*n,2*m+1]-array[2*n+1,2*m]+array[2*n+1,2*m+1])/4
+            Non[array.shape[0]//2+n,m]=(-(array[2*n,2*m])-array[2*n,2*m+1]+array[2*n+1,2*m]+array[2*n+1,2*m+1])/4
+            Non[array.shape[0]//2+n,array.shape[1]//2+m]=(-array[2*n,2*m]+array[2*n,2*m+1]+array[2*n+1,2*m]-array[2*n+1,2*m+1])/4
+    sm.imsave('AA#.jpg',Non)
 
-Revert(HaarIterate(Converttoarray('kvinna.jpg'),3))
+
+Nomatrixcompress(Converttoarray('BWGroup.jpg'))
+#Revert(HaarIterate(Converttoarray('Group.jpg'),3))
+#HaarIterate(Converttoarray('kvinna.jpg'),2)
+#Revert(HaarWavelet(Converttoarray('Group.jpg')))
+
 
