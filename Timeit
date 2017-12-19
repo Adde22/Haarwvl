@@ -46,9 +46,9 @@ def Converttoarray(x):
     return array
 
 """
-experiment1=timeit.Timer(stmt="HaarWavelet(Converttoarray('BWGroup.jpg'))",setup=setup_statements)
-t1=experiment1.repeat(1,5)
+timing1=timeit.Timer(stmt="HaarWavelet(Converttoarray('BWGroup.jpg'))",setup=setup_statements)
+t1=timing1.repeat(1,5)
 print(min(t1)/5)
-experiment2=timeit.Timer(stmt="HaarWavelet(Converttoarray('BWGroup.jpg'))",setup=setup_statements)
-t2=experiment1.repeat(1,5)
+timing2=timeit.Timer(stmt="HaarWavelet(Converttoarray('BWGroup.jpg'))",setup=setup_statements)
+t2=timing2.repeat(1,5)
 print(min(t2)/5)
