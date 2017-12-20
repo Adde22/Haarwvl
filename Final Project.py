@@ -88,11 +88,12 @@ def Nomatrixcompress(array):
             Non[array.shape[0]//2+n,m]=(-(array[2*n,2*m])-array[2*n,2*m+1]+array[2*n+1,2*m]+array[2*n+1,2*m+1])/4
             Non[array.shape[0]//2+n,array.shape[1]//2+m]=(-array[2*n,2*m]+array[2*n,2*m+1]+array[2*n+1,2*m]-array[2*n+1,2*m+1])/4
     sm.imsave('AA#.jpg',Non)
+    Non=Non[:int(Non.shape[0]/2),:int(Non.shape[1]/2)]
+    sm.imsave('AA#2.jpg',Non)
 
 
-Nomatrixcompress(Converttoarray('BWGroup.jpg'))
-#Revert(HaarIterate(Converttoarray('Group.jpg'),3))
+#Revert(HaarIterate(Converttoarray('kvinna.jpg'),3))
 #HaarIterate(Converttoarray('kvinna.jpg'),2)
-#Revert(HaarWavelet(Converttoarray('Group.jpg')))
+#Nomatrixcompress(Converttoarray('kvinna.jpg')))
 
 
