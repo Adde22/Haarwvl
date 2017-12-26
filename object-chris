@@ -50,3 +50,16 @@ class haarwavelet:
         self.inversWM=self.WM.transpose()
         self.inversWNT=self.WNT.transpose()
         self.img_dec=dot(self.inversWM,dot(self.imgdata,self.inversWNT))
+    def save(self):
+    #Sub-array dividing
+    aa=self.imgdata[:int(self.imgdata.shape[0]/2),:int(self.imgdata.shape[1]/2)]   #Top left
+    sm.imsave('aa.jpg',aa)
+
+    ad=self.imgdata[:int(self.imgdata.shape[0]/2),int(self.imgdata.shape[1]/2):]   #Top right
+    sm.imsave('ad.jpg',ad)
+
+    da=self.imgdata[int(self.imgdata.shape[0]/2):,:int(self.imgdata.shape[1]/2)]   #Bottom left
+    sm.imsave('da.jpg',da)
+
+    dd=self.imgdata[int(self.imgdata.shape[0]/2):,int(self.imgdata.shape[1]/2):]   #Bottom right
+    sm.imsave('dd.jpg',dd)
