@@ -10,15 +10,15 @@ from numpy import zeros
 def HaarWavelet(array):
     haararray=np.zeros((array.shape[0],array.shape[0]))
     for i in range(haararray.shape[0]):
-        haararray[int(i/2),i]=(np.sqrt(2))/2
-        haararray[-int(i/2)-1,-i-1]=-(np.sqrt(2))/2
+        haararray[i//2,i]=(np.sqrt(2))/2
+        haararray[-(i//2)-1,-i-1]=-(np.sqrt(2))/2
     for i in range(haararray.shape[0]//2):
         haararray[-i-1,-2*i-1]=(np.sqrt(2))/2
     b=haararray@array
     haararray1=np.zeros((array.shape[1],array.shape[1]))
     for i in range(haararray1.shape[1]):
-        haararray1[int(i/2),i]=(np.sqrt(2))/2
-        haararray1[-int(i/2)-1,-i-1]=-(np.sqrt(2))/2
+        haararray1[i//2,i]=(np.sqrt(2))/2
+        haararray1[-(i//2)-1,-i-1]=-(np.sqrt(2))/2
     for i in range(haararray1.shape[1]//2):
         haararray1[-i-1,-2*i-1]=(np.sqrt(2))/2
     t=np.transpose(haararray1)
