@@ -56,11 +56,9 @@ timing2=timeit.Timer(stmt="Nomatrixcompress(Converttoarray('kvinna.jpg'))",setup
 t2=timing2.repeat(repeat=100,number=1)
 print(min(t2))
 
-#seconds number is amount of repeats
-
 #timing3=timeit.Timer(stmt="HaarWavelet(slicedkvinna)",setup=setup_statements)
-#t3=timing3.repeat(1,1)
+#t3=timing3.repeat(repeat=100,number=1)
 #print(min(t3))
 #timing4=timeit.Timer(stmt="Nomatrixcompress(slicedkvinna)",setup=setup_statements)
-#t4=timing4.repeat(1,1)
+#t4=timing4.repeat(repeat=100,number=1)
 #print(min(t4))
