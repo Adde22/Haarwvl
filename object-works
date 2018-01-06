@@ -1,0 +1,66 @@
+"""
+Created on Sat Dec 16 13:16:18 2017
+@author: jim_k
+"""
+
+from scipy import *
+import scipy.misc as sm
+from numpy import *
+
+class haarwavelet:
+    def __init__(self,file):
+        img=sm.imread(file,True)    #Load image into python as array
+        WM=zeros((img.shape[0],img.shape[0]))   #Array with zeros shape number of rows
+        for n in range(int(img.shape[0]/2)):    #Filling array with sqrt(2)/2
+            #First half of array
+            WM[n,2*n]=sqrt(2)/2                 #Each row and row times 2
+            WM[n,2*n+1]=sqrt(2)/2               #Each row and row times 2 + 1
+            #Secong half of array
+            WM[int(img.shape[0]/2)+n,2*n]=-sqrt(2)/2    #As previous only nalf way down
+            WM[int(img.shape[0]/2)+n,2*n+1]=sqrt(2)/2
+        self.WM=WM
+        #WNT-matrix, multiplyed from the right
+        WNT=zeros((img.shape[1],img.shape[1]))  #Zero martix with shape of columns
+        for n in range(int(img.shape[1]/2)):
+        #First half of array
+            WNT[n,2*n]=sqrt(2)/2        #Same method as above
+            WNT[n,2*n+1]=sqrt(2)/2
+            WNT[int(img.shape[1]/2)+n,2*n]=-sqrt(2)/2
+            WNT[int(img.shape[1]/2)+n,2*n+1]=sqrt(2)/2
+        self.WNT=WNT.transpose()     #Matrix transpose in order for the effect to be latheral
+
+        if img.shape[0]%2!=0 or img.shape[1]%2!=0:   #Divide by 2 check remainder
+            if img.shape[0]%2!=0:
+                img=img[:-1]     #Slice last row
+            if img.shape[1]%2!=0:
+                img=img[:,:-1]   #Slice last column
+        self.img = img
+    def compress(self):
+        self.imgdata=dot(self.WM,dot(self.img,self.WNT))   
+    def show(self,other=None):
+        if other == None:
+            sm.imshow(self.img)
+        if other is 1:
+            img_comp=self.imgdata[:int(self.imgdata.shape[0]/2),:int(self.imgdata.shape[1]/2)]
+            sm.imshow(img_comp)
+        if other is 2:
+            sm.imshow(self.imgdata)
+        if other is 3:
+            sm.imshow(self.img_dec)
+    def decompress(self):
+        self.inversWM=self.WM.transpose()
+        self.inversWNT=self.WNT.transpose()
+        self.img_dec=dot(self.inversWM,dot(self.imgdata,self.inversWNT))
+    def save(self):
+        #Sub-array dividing
+        aa=self.imgdata[:int(self.imgdata.shape[0]/2),:int(self.imgdata.shape[1]/2)]   #Top left
+        sm.imsave('aa.jpg',aa)
+        
+        ad=self.imgdata[:int(self.imgdata.shape[0]/2),int(self.imgdata.shape[1]/2):]   #Top right
+        sm.imsave('ad.jpg',ad)
+        
+        da=self.imgdata[int(self.imgdata.shape[0]/2):,:int(self.imgdata.shape[1]/2)]   #Bottom left
+        sm.imsave('da.jpg',da)
+        
+        dd=self.imgdata[int(self.imgdata.shape[0]/2):,int(self.imgdata.shape[1]/2):]   #Bottom right
+        sm.imsave('dd.jpg',dd)
